@@ -371,3 +371,45 @@ This chapter describes the implementation of all the technologies described abov
 ### 4.3.1 Backend Server
 
 
+
+**naming conventions, controller example and handling, model, routing, devise, cors, jbuilder, 
+
+
+
+### 4.3.2 Database
+
+
+
+**schema, diagrams, sqlite preview, migrations, seed, relations
+
+
+
+### 4.3.3 Streaming Solution
+
+
+
+**simplepeer example
+
+
+
+### 4.3.4 Web Graphics
+
+
+
+**event listeners, how they were created, interactions, video strach and audio track
+
+
+
+### 4.3.5 Serverless Computing
+
+
+
+**firebase event listeners example, ss from console
+
+
+
+### 4.3.6 UI and Front-End
+
+
+
+**templating, methods, data binding vuetify, axios, firebase sdk, router, auth and storage, scss
