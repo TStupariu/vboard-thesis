@@ -44,7 +44,7 @@ This paper is structured as follows. Chapter 1 provides an introduction, the mot
 
 
 
-# CONTENTS
+# Contents
 
 1. Introduction
 
@@ -86,7 +86,7 @@ This paper is structured as follows. Chapter 1 provides an introduction, the mot
    	
    	4.3 Implementation
    	
-   		4.1.1 Backend Server
+   		4.3.1 Backend Server
    	
    		4.3.2 Database
    	
@@ -250,7 +250,7 @@ This sub chapter describes the theoretical aspects and the tools used for creati
 
 
 
-### 4.2.1 Back-end Server
+### 4.2.1 Backend Server
 
 
 
@@ -328,13 +328,45 @@ Firebase also comes into help for peer signaling. In order for 2 clients to conn
 
 
 
-The client of the application is web based and uses a library called VueJS, it being an open-source JavaScript framework for building user interfaces. 
+The client of the application is web based and uses a library called VueJS, it being an open-source JavaScript framework for building user interfaces. It is a versatile, easy to adapt/integrate and performant library having a really small footprint comparing to other frameworks.
 
-**vuetify + grid
 
-**axios
 
-**routing and guards + localstorage
+![JS_Size](C:\Users\t.stupariu\vboard-thesis\assets\JS_Size.PNG)
 
-**scss
+It represents the perfect compromise between big frameworks like Angular 5 that contain every package you want or don't want and small packages like React, while also keeping up and out-performing traditional frameworks. It uses a component based system, allowing for easy re-rendering and communication between different parts of the application.
+
+In order to not have to design every component from scratch the system uses a Material Design based library called Vuetify. Other than providing an intuitive way to customize theming and elements, it also provides a a grid system for designing complicated layouts. It is inspired by the 12-column Bootstrap grid while also having some extra Material Design specific elements. Material Design is a design language and guideline developed in 2014 by Google, expanding on the card based interface that was first introduced in Google Now. It provides a clean and minimalistic look for components while keeping functionality richness and a clean user experience. Also, a great part of Vuetify components is their high reusability, allowing to duplicate elements across different parts of the website while retaining design and behavior.
+
+In order to communicate with the Ruby on Rails server, vBoard uses a JavaScript library called Axios. Its advantage over native APIs such as fetch is that is provides a cleaner interaction and also it supports intercepting requests in order for transformation of attributes like headers. Also, the code used for making an HTTP request is much smaller in size, allowing for a more friendly representation between lines of code.
+
+Another part from where the client gets its data is Firebase. On the web there are currently 2 ways of communicating with a Firebase Real-Time Database, one being using HTTP requests, while the other being using their proprietary SDK. The advantage of the SDK is that is allows for easy subscription to their event listener system, so that updates to the database are automatically transmitted to all clients. Also, Firebase uses a caching system where it caches all the data between requests except for the first one, to allow for faster transfers. The SDK is easy to setup using just a configuration file and it provides a service-like system of interaction.
+
+Since it is developed as a Single Page Application, the usage of a router is required for navigating between pages and components. This is why the app is using the officially supported library for routing called vue-router. It provides a way for dynamically displaying components dependent on the user interaction. Also, different guards can be set on routes so that a user is forced to authenticate before accessing certain parts of the system. 
+
+The routing and its guards are based on the HTMl localStorage API. Basically, on every request the client has to include a JSON Web Token in order to validate with the server the identity of the user. Afterwards, as a response, the client is given a different token for every request, this way increasing the security of the application. The system then stores this token in the localStorage of the page.
+
+Despite using Vuetify as a component library, there are times when classic CSS rules have to be applied in a custom manner. For this, instead of using classic CSS which has some limitations like no variables or the fact that rule selectors can become really verbose, the application uses SCSS which then gets interpreted to standard CSS. SCSS provides a syntax for shortening the CSS code you have to write while also providing useful add-ons like variables or mixins. Overall, while it does not add anything to the final user experience, the place where it really shines is in developer satisfaction, since SCSS is much easier to understand rapidly and code complicated selectors and rules.
+
+In order to bundle all the JavaScript files together for usage in the browser, the Vue-CLI (Command Line Interface) comes with WebPack built in, this way not requiring any additional configurations or setups.
+
+There are plenty of external JavaScript packages bundled in the application and, in order to manage them all, a package manager like NPM (Node Package Manager) is used. This way, other than creating an easy way to add packages to a solution, it provides a really simple way of keeping track of all modules and their dependencies and it simplifies the way the code can be migrated from one computer to the other.
+
+
+
+##4.3 Implementation 
+
+
+
+This chapter describes the implementation of all the technologies described above. While the theoretical parts have already been explained, this chapter's goal is to explain how these components are used and how they are tied together to create one cohesive application.
+
+
+
+### 4.3.1 Backend Server
+
+
+
+
+
+
 
