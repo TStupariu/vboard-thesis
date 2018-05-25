@@ -256,15 +256,21 @@ This sub chapter describes the theoretical aspects and the tools used for creati
 
 The language used for handling all the back-end logic is Ruby, in conjunction with the Rails framework. It works as a stand alone API, allowing for future integration with mobile, desktop or any other type of client. Ruby is a dynamic, interpreted, reflective, object-oriented programming language designed and developed in the 1990s. While it can work as a standalone programming language, it's popularity has really grown with the rise of Rails, a framework for easy and rapid development of web applications. The current iteration of Ruby used in this project is Ruby 2.3.3, while Rails' version is 5.1.4 . Rails is a server-side web application framework that uses a general MVC pattern for data transmission.
 
-
-
-The way Ruby on Rails uses MVC in this project is as follows: The model properties are being defined in migrations, while different limitations and validations on those properties are done into their own file. Using these models that automatically map to the tables in the database using the Active Record pattern, the controller receives all inbound HTTP requests and handles tha data, later returning that data to the view in JSON format.
+The way Ruby on Rails uses MVC in this project is as follows: The model properties are being defined in migrations, while different limitations and validations on those properties are done into their own file. Using these models that automatically map to the tables in the database using the Active Record pattern, the controller receives all inbound HTTP requests and handles the data, later returning that data to the view in JSON format.
 
 
 
 ![Screen Shot 2018-05-24 at 13.29.57-7157830](assets/Screen Shot 2018-05-24 at 13.29.57-7157830.jpg)
 
 
+
+One advantage and feature that makes Ruby on Rails stand out from other frameworks and helps in creating a really agile development environment is its convention over configuration philosophy. This is a software design paradigm that aims to reduce the amount of tedious decisions a developer has to take in order to increase the time allocated for developing actually important features. This way, a lot of things like views, controllers and models are't tied together using import statements, dependency injection or other techniques. Instead, their are connected through naming conventions. These conventions will speed up development, keep the code concise and readable and, most important, these conventions allow you an easy navigation inside your application. 
+
+[Convention over Configuration]: https://rubyonrails.org/doctrine/#convention-over-configuration	"Deisgn Choices - David Heinemeier Hansson"
+
+> Not only does the transfer of configuration to convention free us from deliberation, it also provides a lush field to grow deeper abstractions. If we can depend on a Person class mapping to people table, we can use that same inflection to map an association declared as has_many :people to look for a Person class. The power of good conventions is that they pay dividends across a wide spectrum of use.
+>
+> But beyond the productivity gains for experts, conventions also lower the barriers of entry for beginners. There are so many conventions in Rails that a beginner doesn’t even need to know about, but can just benefit from in ignorance. It’s possible to create great applications without knowing why everything is the way it is.
 
 The mapping between the controller actions and the HTTP requests is done using a routing module that redirects every inbound request to its corresponding controller method. This application uses a combination of GET and POST requests in order to handle all CRUD (Create-Read-Update-Delete) operations.
 
@@ -363,10 +369,5 @@ This chapter describes the implementation of all the technologies described abov
 
 
 ### 4.3.1 Backend Server
-
-
-
-
-
 
 
