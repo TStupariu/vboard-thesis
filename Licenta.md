@@ -338,7 +338,9 @@ The client of the application is web based and uses a library called VueJS, it b
 
 
 
-![JS_Size](C:\Users\t.stupariu\vboard-thesis\assets\JS_Size.PNG)
+![JS_Size](assets/JS_Size.PNG)
+
+
 
 It represents the perfect compromise between big frameworks like Angular 5 that contain every package you want or don't want and small packages like React, while also keeping up and out-performing traditional frameworks. It uses a component based system, allowing for easy re-rendering and communication between different parts of the application.
 
@@ -372,7 +374,59 @@ This chapter describes the implementation of all the technologies described abov
 
 
 
-**naming conventions, controller example and handling, model, routing, devise, cors, jbuilder, 
+ A big part of the way Ruby on Rails works is based on the convention over configuration programming paradigm. In this case, you can see that in action using the Profile model, Profile controller and the Profile views set. There are no other imports or necessary dependency injection, the only way Rails knows about all these files is from its naming conventions.
+
+The flow from when an HTTP request comes in and to the point where data is returned to the client is this: The request reaches the routing table where it will be assigned a controller and an action, then it moves on to the actual controller where processing is done, then Rails automatically matches the view corresponging to the action by using the Controller and Action names and returns the data. Let's take the example of an HTTP POST request to "/profile/create". First of all, the routing table finds the first match of the URL string and assigns that specific request the appropriate controller. In this case, if a request is a POST to '/profile/create' it will redirect the processing to the profile controller, at an action called 'create'.
+
+
+
+![Screen Shot 2018-05-27 at 13.33.12](assets/Screen Shot 2018-05-27 at 13.33.12.jpg)
+
+
+
+Once it reaches the controller, there is an extra step the application will have to perform before starting processing the data. The before_action tag specifies that each time a request comes in it will have to go through some extra steps. In this case, in order to support authentication and to properly secure the controller, this piece of software has to first check the validity of the JWT token. Devise handles it pretty well, and in this case some exceptions to the validation are in place for the actions 'index' and 'getByUserId', since not all methods of an API have to be private. Basically, a user has the possibility to view all the user profiles or search for a profile based on an ID, but without being properly authenticated he cannot create new users. This way, anyone is allowed read access to this part of the database, but only authenticated users are allowed to perform any modifications.
+
+The next step it does is it matches the name from the routing table to an action in the controller, in this case it being 'create'. The parameters of the request are being accessed using a map called 'params'. Also, the controller doesn't have to explicitly specify what does it want to render in the view, it can simply store those bits in variables with an '@' sign before. Basically, this allows a variable to have such a scope that it can be read by Jbuilder from the view. What this allows for is for the controller to only handle the data processing, not needing to care about the rendering logic.
+
+
+
+ ![Screen Shot 2018-05-27 at 13.35.24](assets/Screen Shot 2018-05-27 at 13.35.24.jpg)
+
+
+
+Next, the view engine is invoked and it will render the entire @profile variable. It had the possibility to access this since it has been declared with the '@' sign in front.
+
+
+
+![Screen Shot 2018-05-27 at 13.45.17](assets/Screen Shot 2018-05-27 at 13.45.17.jpg)
+
+
+
+There are multiple ways of defining a model in Ruby on Rails, but one of the most popular ones is leaving the data properties of models in migration files and in the generated schema file, and keeping the validations in the model file. This way it creates a cleaner way of setting up complex validations without having a lot of attributes declared in a file.
+
+
+
+![Screen Shot 2018-05-27 at 13.47.42](assets/Screen Shot 2018-05-27 at 13.47.42.jpg)
+
+
+
+Another important part of the application is Devise, the gem that handles authentication. It does everything from hashing the passwords before storing them in the database, creating and passing around Json Web Tokens and checking the validity and identity of every request. It supports a lot of features like email confirmation, password recovery and social media integration, and in this case it is set up for email authentication, password recovery, tracking of user authentication activity, validation of passwords and emails and social media authentication.
+
+
+
+![Screen Shot 2018-05-27 at 13.52.00](assets/Screen Shot 2018-05-27 at 13.52.00.jpg)
+
+
+
+Since this is an API, it will need to support Cross-Origin Resource Sharing, and for this the rack-cors gem is used. What it basically does it attaches some specific Access Control headers to every response so that the browser knows that the application is setup for handling multiple origins for requests.
+
+
+
+![Screen Shot 2018-05-27 at 13.55.58](assets/Screen Shot 2018-05-27 at 13.55.58.jpg)
+
+
+
+Finally, Jbuilder is used for rendering the views. Rails comes with it setup out of the box, so little to no configuration is required. While there are multiple alternatives to JBuilder, this gem is used since it makes it easy to render complex relations and model the response according to the needs of the client.
 
 
 
@@ -380,7 +434,21 @@ This chapter describes the implementation of all the technologies described abov
 
 
 
-**schema, diagrams, sqlite preview, migrations, seed, relations
+Ruby on Rails comes with SQLite configured, and for development purposes there is no need to switch to a server absed SQL Database. The schema for this is quite a simple one, but it solves all the needs. At the end of the day, the only purpose of this backend server is to handle authentication and manage the different groups and users belonging to the groups, since no part of the stream will actually pass through this server. Other than the attributes declared in the migrations files themselves, Devise adds a couple columns to the user model, since it would need these for tracking user activity through authentication. Only 4 main tables are required in order to run the application, those being 'users', 'profiles', 'rooms' and 'user_rooms'.
+
+![erd](assets/erd.png)
+
+
+
+One of the most important features of the entire Ruby in Rails ecosystem combined with Active Record is support for database migrations. They allow you to easily create versions of your database, while also making reverting to older versions a breeze. Each migration is basically a class that has multiple changes defined. They can be from adding tables, removing tables, altering them and even inserting SQL code manually. Another advantage is that unlike other migratino solutions for other languages like Entity Framework, you only really have to define the way the migrations go upwards. This means that you have to define how it will behave going from, let's say 1.1 to 1.2, but if you ever want to revert the migrations, Ruby on Rails will figure out by itself what and how it wants to revert the database. This way it removes user error when manually writing reversion migrations.
+
+For development purposes, seeding the database is also a popular option in order to avoid creating some dummy entities each time you reset the database. Rails offers an easy solution for this in the form of a file called 'seed.rb'. Basically, you only need to define some entities in there, and you can run that file at any time using a simple command line tool. This application automatically generates a couple users, rooms and some links between them in order to make testing a little more easier and staright forward.
+
+The last important thing that Rails and Active Record handle are relations. Since the whole ideology of using migrations is a code-first attitude towards databases, meaning that you should never have to touch the database directly, reltaions are also set directly in the models themselves, without manually having to add foreign keys to databases. Also, Rails can automatically generate join tables for many to many relations, but you can also define your own join tables if more properties are needed. Again, using conventions over configurations, in most relation cases you don't even have to define the property which stores the foreign key ID, since Rails will figure it out itself frmo the naming of the entities.
+
+
+
+![Screen Shot 2018-05-27 at 14.27.22](assets/Screen Shot 2018-05-27 at 14.27.22.jpg)
 
 
 
@@ -388,7 +456,19 @@ This chapter describes the implementation of all the technologies described abov
 
 
 
-**simplepeer example
+For the video live streaming part of the application I used a JavaScript library that acts as a wrapper over WebRTC Peer-To-Peer streaming called 'simplepeer'. The way it currently works is once the streamer finished loading his page, the program will start capturing a video stream of the canvas. At the same time, a user will be asled for permission to access the microphone, since the final video may contain an audio track as well. If that permission is granted, the application will attach to the main video track of the stream another audio track containing the recording from the computer's microphone. Afterwards, that stream object will be given to the streaming library to send over the peer connection. The stream is captured at a framerate of 30 frames per second, but that can easily be changed in the future by the user in order to accomodate for slower internet conenctions. 
+
+
+
+![Screen Shot 2018-05-29 at 21.55.54](assets/Screen Shot 2018-05-29 at 21.55.54.jpg)
+
+
+
+In order ti initially capture the stream, the application has to first find the canvas element on the page, and it currently does that by using its ID. Also, another important aspect to note is that the canvas is forced to re-render its content whenever a peer decides to connect. This has to be done since otherwise the newly connected peer would not see anything until something modified on the streamer's canvas. 
+
+Also, this streaming method does support multiple peers. While it wouldn't be recommended to have thousands of users connected to the same stream, having somewhere around 20 to 30 users should not be a problem depending on the streamer's internet connection. The signalling system is built in such a way that whenever a new user wants to view the stream it will not disrupt the other users' watching experience.
+
+Last but not least, a good reason to use such a wrapper library is that it handles connection closures by itself. This way, when a user disconnects, either because of closing the tab or internet issues, the streamer's connection to it will be automatically closed and it will not put extra stress on the internet connection.
 
 
 
@@ -396,7 +476,19 @@ This chapter describes the implementation of all the technologies described abov
 
 
 
-**event listeners, how they were created, interactions, video strach and audio track
+In order for the canvas to actually be useful there have to be tools in place for the streamer to draw on it. For this, the application uses a JavaScript library called 'FabricJS' for actually drawing the items on the canvas. While this library does a great job at drawing, the only interaction it has out of the bow is dragging the elements around. So the application has to manually implement the tools for drawing and the way a user would interact with the canvas in order to create the shapes, text and desired images. 
+
+
+
+![Screen Shot 2018-05-29 at 21.40.00](assets/Screen Shot 2018-05-29 at 21.40.00.jpg)
+
+
+
+For different mechanics like deleting an object when the delete key is pressed or for click and hold in order to draw a shape the application attaches a series of event listeners to the canvas object. This way, it can intercept the interactions a user makes and convert them to drawn shapes according to the tool selected by the streamer. 
+
+Different items require different parameters in order to be created, and another thing to keep in mind is the order of those given parameters. Since you could draw arectangle from left to right or the other way around, the app also keeps track of the direction of the drawn shapes in order to accurately position them on the canvas object. Another thing that needs an event listener is the color picker. This tool allows a user to select different fill colors for shapes or text colors. While it does use the default color picker embedded into most browsers, it still needs to be able to see the dynamic changes in color a user might make without reselecting the tool. This allows you to draw the same shape multiple times with a different color each time without forcing you to reselect the tool after a color change.
+
+There are multiple tools offered to a user in order to allow him to be creative in drawing the items. This first one is a brush tool which allows you to select the color and thickness. Next up is a selection tool, allowing you to select an item for rearranging it on the canvas or to mark it for deletion. 2 of the current supported shapes are rectangles and circles, for which a user can specify the fill color and, in case of the circle, the stroke width. Text is a really essential tool that also provides quite a bit of customization in the form of font size, color and allignment in the drawn container. Also one can create simple straight lines while also specifying the width of the drawn line. The canvas also has support for images, a user having to simply input the URL of the image and that will automatically be added to the canvas. The last 2 items are a deletion tool which works by first selecting the desired item to be deleted and then clicking the appropiate tool and a color picker which controle the color of the element currently being drawn.
 
 
 
@@ -404,7 +496,17 @@ This chapter describes the implementation of all the technologies described abov
 
 
 
-**firebase event listeners example, ss from console
+A really important part in the simplicity and server light-weightness is done through serverless computing. Basically, there are 2 main parts of the application that utilize a service provided by Google called 'Firebase Real-Time Database'.
+
+The first of them is the peer signalling. Basically, before the peers can start streaming withtin each other they need to establish a connection and to notify about their existence. First of all, the viewer has to express it's existence. The streamer will automatically detect its presence through firebase's SDK and post an offer. This is automatically picked up by the viewer which validates the offer and sends a response in the same tree hierarchy. Again, the response is automatically signaled to the streamer and it allows the peers to connect and start the video stream. In order for this back-and-forward communication to happen there are some validations that need to be in place, so that the component doesn't necessairly re-render on every change to the node in the database.
+
+Another part of the application that works solely using Firebase is the chat system. Basically, this allows any user in a room to interact with each other by using a chat. Once they connect to the room they will be attached to an event listener in the database. This way, any time a node changes because, for example, some added a new comment, the client will automatically fetch the remaining data in order to be displayed in real time. This approach eliminates the need  for a standalone socket implementation or for server polling. Also, if a user decides it wants to add a new comment, it will trigger the Firebase server to automatically signal all the connected users, this way forcing a refresh of that specific content on every other user connected to the stream.
+
+One of the great parts of using Firebase in conjunction with a regular server with a database is that it simplifies the socket process by a lot. Also, it does relieve a lot of network and processing stress frmo the server, making the costs associated to hosting it smaller. 
+
+
+
+![Screen Shot 2018-05-31 at 16.07.31](assets/Screen Shot 2018-05-31 at 16.07.31.jpg)
 
 
 
@@ -412,4 +514,75 @@ This chapter describes the implementation of all the technologies described abov
 
 
 
-**templating, methods, data binding vuetify, axios, firebase sdk, router, auth and storage, scss
+In order to help with creating a really fast web application, the client uses a library called 'VueJS' for handling UI navigation and not only. It is based on an MVC like model, meaning that it uses templates to render the content and controllers to keep track of the displayd content. Also, it is really lght-weight, allowing for a page to load quickly and not to load unnecessary resources. It allows for a developer to keep components in a single file or split them apart, however he wants, this way making it easier to keep track of variables across views and JavaScript files.
+
+An important part in rendering the content it Vue's templating system. One of the main features it offers is 2 way data binding. Basically, this allows a user to dinamically change a page's content whenever a variable in the controller modifies, but also automatically modify a controller variable whenever a bound input is modified by the user. This allows for a much less verbose communication methos between the 2 main parts of a component than a simpler one way data binding system would offer. Also, certain template directives allow it for easier rendering of elements like lists. By using an attribute like 'v-for', Vue is able to render a list of items from the contrller in the view without needing to generate the HTML code in the JavaScript file. Also, through a key system, it is able to easily figure out which item from a list has been interacted with.
+
+One palce where Vue excels in comparison to other libraries and frameworks is in code organization. Everyting in a JavaScript file has to be split between data items which are variables that can be seen and modified from the view, separate methods for data processing and handling more complicated interactions like routing logic between components and even processed variables which change their value whenever another variable changes, directly or indirectly, throughout the app. All these methods declared like this are accessible to the client through the view if they are tied to an action on an element.
+
+The way Vue handles page rendering and mounting is pretty similar to any other JavaScript framework, and, just like ReactJS it provide a number of lifecycle hooks of a component in order to give you proper control over the flow of data through the component. Some of the most popular lifecycle hooks are created, mounted, updates and destroyed, and this app uses the mounted hook quite often. Basically, any time you would have to do an HTTP request to the server you will render the UI first without loading the data, and then populate it once the data arrives. This will give a user the impression that a website loads faster than if he would have to wait for the data in order for anything to be displayed. Also, there are other initializations that can be done only after the UI has rendered, incresing the responsiveness of the page.
+
+An important part of the components used are rendered using Vuetify. This is basically a JavaScript and CSS library that provides a suite of Material Design components which make the craetion of a design easy and effortless. Other than some pre-styling applied by the library, the greatest advantage of using it is that it also comes with a 12 grid system for creating complicated layouts. These layouts are easy to adapt to being responsive, this way being rendered right both on the desktop and on mobile or tablet. Below is an example on styling between standard HTML components and Vuetify components.
+
+[Material Design]: https://material.io/design/	"Material Design"
+
+
+
+![Screen Shot 2018-05-31 at 16.13.52](assets/Screen Shot 2018-05-31 at 16.13.52.jpg)
+
+![Screen Shot 2018-05-31 at 16.14.14](assets/Screen Shot 2018-05-31 at 16.14.14.jpg)
+
+
+
+Axios is the HTTP Client of choice since it has multiple advatages over an approach using just the standard fetch API. While the fetch API can basically do any type of request you might need, it does it in a much more verbose way than AXIOS. Also, AXIOS introduces some interceptors for HTTP requests allowing you to modify headers of any incoming or outgoing request. All in all, it provides an easier and more concise way of interacting with the data on a server.
+
+A key part of the application is Firebase as we mentioned before, and since only the client ever gets to interact with it, it needs a complete suite of actions to match. While Firebase does provide an API-like approach giving you endpoints for all your data, a better way of retrieving and writing data into the real-time database is by using their SDK in the form of a JavaScript library. Also, a crucial feature of this app is being able to automatically listen to events triggered in the database and for that using the SDK is the only real viable option. In order to use the SDK a developer needs to go to the Firebase console and create a new project. After setting the database access rules you are able to get all the configuration parameters needed in order for the application to estaclish contact with the cloud hosted database.
+
+
+
+![Screen Shot 2018-05-31 at 16.20.02](assets/Screen Shot 2018-05-31 at 16.20.02.jpg)
+
+
+
+Routing is a really important but basic part of the web platform. In a way, it provides functionality that a user might take as a given, but on the code side of things it handles not only navigationg between components but authentication as well. The officially supported router for VueJS is vue-router, and that is also the one used here. In order to setup the routes the application uses a matching pattern to match the URL with one of the configured ones and it renders the appropriate component depending on the match. It also supports wildcards, this way, for example you can redirect any navigation that is unknown like an undefined URL to a certain page like Home. Besides serving these purposes, keeping an unauthentificated user out of places where he shouldn't be is a key responsability. For this, at every navigation, before entering the next component, the router checks if a user is authenticated before letting him in. In some cases, it might redirect the user to the login page in case his JSON Web Token is invalid. This is how it is able to decide which user can access what part of the page and redirect unauthorized ones to public zones of the application.
+
+
+
+![Screen Shot 2018-05-31 at 16.28.47](assets/Screen Shot 2018-05-31 at 16.28.47.jpg)
+
+
+
+The last essential link in the authentication chain is done through localStorage. The way devise authentication was configured on the server is this: Forst of all, a user signs in and the back-end server generates a token. For the next request, the client will need to include the previously generated token in the headers of the request. When returning, other than giving back the requested data, the server will also issue a new token which the client will again have to memorize and attach to the next request. This creates a really secure chain of events but adds a little complexity to handling the tokens on the client side. Basically, the token chages and the client has to keep track of the latest issued one. While it could be kept in memory, the problem is that would force the user to login every single time he closes the tab. While it works great from a security standpoint, frmo a user experience perspective it's really bad. For this, the browser has to store locally the current token. In order to do this it uses an HTML5 API called localStorage which allows him to store it locally on the client's computer. Despite being stored on the computer, the JSON string that is being stored can only be accessed from the domain it has been set. This way, a website like 'www.facebook.com' can not access the locally stored items of a website like 'www.vboard.com', helping to mitigate session hijacking.
+
+On the styling part of the UI, while Vuetify handles a lot of the basic work, there are always adjustments which will require manually writing some CSS code. While CSS is not inherently bad, it can easily be enhanced by using SCSS, a language that is interpretted and convert into standard CSS. One of the things this adds are variables and rule nesting. Variables are an easy way to keep track of things like colors throughout CSS code, this way even making theming easier. On the other hand, rule nesting is a life saver when having to write long CSS rules and also the fact that any CSS syntax is valid SCSS makes it a really easy transition especially for designers. Here is an exmaple of the differences:
+
+
+
+![Screen Shot 2018-05-31 at 16.44.47](assets/Screen Shot 2018-05-31 at 16.44.47.jpg)
+
+
+
+The last thing making the development much more pleasant throughout the application is the use of features from the EcmaScript 6 Standard. Things like constants, arrow functions and async/await make programming for the front-end much more pleasing. For starters, the 'const' keyword allows you to define a variable which cannot be directly modified in code, this way making sure that other unexpected pieces of code do not modify its value. Next up, arrow functions, other then being easier to read and follow, remove the need to bind the 'this' context. In the past, handling this context was a nightmare in JavaScript and you would have to manually do bindings, but by using arrow functions the 'this' context is transmitted automatically without any developer intervention. Last but not least is the 'async/await' syntax. What it basically allows is to treat asynchronous code as synchronous code. This way you eliminate most of the promises throughout the app and the so-called 'callback hell' where you had to nest multiple promises in order to be able to define a clear order of execution of multiple async functions like API calls. While all calls to the API are made using this syntax, the calls to the Firebase Real-Time Database are still ahndled with promises since they don't use a standard HTTP architecture, but more of a socket-like interface combined with event listeners.
+
+[ES6]: http://es6-features.org/#Constants	"Ecma Script 6"
+
+
+
+## 4.4 Validation and Testing
+
+
+
+Testing is a crucial part of developing an application since it helps write more bug-free code frmo the beginning. In order to do this there are some tests implemented for Ruby on Rails. Rails has a gem called 'test_helper' used for writing integration tests.
+
+
+
+![Screen Shot 2018-05-31 at 16.53.31](assets/Screen Shot 2018-05-31 at 16.53.31.jpg)
+
+
+
+This suite helps a developer test anything from methods, controller actions and request handling. You can automatically simulate HTTP requests towards the API and assess the results of that specific call. Since it comes out of the box with Ruby on Rails it features a great integration with the entire ecosystem.
+
+Another thing that helps manual testing is seed data. Especially during the early stages of development, the database might me redone multiple times and a lot of the times data will be lost while testing. While that si not a problem during testing, having to constantly manually create new entities can be tedious and time consuming. In order to automate this process, Ruby on Rails provide a way to automatically generate entities in the database by using one file and a command. The file stores the ActiveRecord instruction for seeding like the entities to be added and addition logic. In our case, the seed method checks if there are already existing elements of a certain type in the database. before adding new ones in order to not get duplicate names. After this initial check it automatically creates and saves these entities just like it would if those actions would be performed in a controller. This file can only be written once and it can be run at any time using the 'rake db:seed' command.
+
+Last but not least, the Rails console is a really valuable addition to the entire ecosystem. Even in the controllers, at the end of the day, every action simply executes some lines of Ruby code and ActiveRecord commands. The console allows you to do this same thing dinamically, sort of like a broswer console might allow you this for JavaScript. This is a great way to initially test your database queries and CRUD (create-read-update-delete) operations. You can see the results of your queries instantly in the console and even save things directly into the database. Basically, it creates a simulated environment where it allows the developer to play around in order to find the best and most efficient queries.
+
