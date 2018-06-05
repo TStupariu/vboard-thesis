@@ -282,7 +282,7 @@ This being an API, it has to be able to support CORS (Cross-Origin Resource Shar
 
 
 
-###4.2.2 Database
+### 4.2.2 Database
 
 
 
@@ -294,7 +294,7 @@ Another big helper flexibility-wise are ActiveRecord Migrations. They provide a 
 
 
 
-###4.2.3 Streaming Solution
+### 4.2.3 Streaming Solution
 
 
 
@@ -304,7 +304,7 @@ The application also uses a wrapper over this standard in the form of a JavaScri
 
 
 
-###4.2.4 Web Graphics
+### 4.2.4 Web Graphics
 
 
 
@@ -367,6 +367,14 @@ There are plenty of external JavaScript packages bundled in the application and,
 
 
 This chapter describes the implementation of all the technologies described above. While the theoretical parts have already been explained, this chapter's goal is to explain how these components are used and how they are tied together to create one cohesive application.
+
+
+
+## 4.3 Implementation
+
+
+
+This chapter describes how the application makes use of all the technologies presented above in order to make one smooth user experience. It explains how everything is used throughout the application and also how they all tie and communicate together.
 
 
 
@@ -586,3 +594,30 @@ Another thing that helps manual testing is seed data. Especially during the earl
 
 Last but not least, the Rails console is a really valuable addition to the entire ecosystem. Even in the controllers, at the end of the day, every action simply executes some lines of Ruby code and ActiveRecord commands. The console allows you to do this same thing dinamically, sort of like a broswer console might allow you this for JavaScript. This is a great way to initially test your database queries and CRUD (create-read-update-delete) operations. You can see the results of your queries instantly in the console and even save things directly into the database. Basically, it creates a simulated environment where it allows the developer to play around in order to find the best and most efficient queries.
 
+
+
+## 4.5 Personal Contribution
+
+
+
+This sub-chapter has the purpose of detailing the personal contribution added to the project. We will start with the back-end side of the project and finish with the UI of the application.
+
+So, first of all, the back-end server. While the base structure of the project was generated using the Rails command line tools, I personally had to create the structure of the entities, models and validations and the Database queries. All those parts had to be joined in the controllers and create the entire back-end logic from scratch. Also, manually configuring the project from Cross-Origin Resource Sharing to the security of the platform had to be implemented from scratch. Next, as fas as the Firebase storage goes, I had to create a project and figure out the structure of that Database and how it could relate to the Rails database. Especially in NOSQL databases, having a well defined structure can help a lot in future development and in avoiding critical bugs. Also, while the CRUD(Create-Read-Update-Delete) operations on the server do not have to be implemented by hand, the interaction with it form the client does. So every listener for changes and modification logic has to be implemented from scratch. A good example of this is the Peer signaling, where clients have to listen for certain specific events in a certain order for them to properly establish a valid communication channel using WebRTC.
+
+Speaking of WebRTC, I had to implement the streaming logic and the way peers connect to each other. Getting the stream is also an easy task, the HTML5 API providing an easy way to get such a media object. That object had to be manipulated in order to support additional audio tracks for having the auditive part as well.
+
+We come to the graphics part, where every single tool and  interaction had to be implemented form scratch. Every event listener and mouse handling logic had to be implemented separately. Also, handling the parameters for the shape drawing library is done manually since they might change without the used tool actually changing.
+
+This is all implemented as a part of the UI made in VueJS. For this, the canvas part is a self-sustaining component in itself. This way it allows for easy modifications down the line where if other technologies or implementations appear they could easily swap the current approach by simply modifying a Vue file. Other elements also share this component-based approach like the chat, is also being it's own standalone component. The client is set up as a Single Page Application and in order for a good user experience I had to implement routing between components. When doing this I always had to keep in mind what components are publicly accessible and which require a certain authentication state. Also, all the rendering and logic together with UI interactions were implemented from scratch in VueJS.
+
+Also, while the base design of the components are done using Vuetify, the layout and structuring of the HTML page was done without the use of a pre-determined template.
+
+In a nutshell, while the platform does use plenty of libraries and gems as wrappers over lower level technologies, they all still require plenty of modification and coding in order to get them all to work together.
+
+
+
+# 5. Conclusion
+
+
+
+This chapter goes through a brief conclusion on how the problem was solved using the above technologies and approaches.
