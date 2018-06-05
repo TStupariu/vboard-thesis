@@ -621,3 +621,17 @@ In a nutshell, while the platform does use plenty of libraries and gems as wrapp
 
 
 This chapter goes through a brief conclusion on how the problem was solved using the above technologies and approaches.
+
+First of all, the problem of platform compatibility is solved by using a web only approach. Everything is done through a web application that requires no extra plug-ins or extensions. While the Peer-to-Peer streaming solution is a new web standard that hasn't yet been adopted by all browsers, the major ones like Google Chrome and Mozilla Firefox do have it working reliably. Since every interaction is based on the HTML5 standard, basically any device, be it desktop, laptop, phone or tablet could theoretically make use of the application. While drawing on a phone might not offer an optimal experience, any browser that has support for HTML video should be able to display an incoming stream.
+
+Also, another problem this application solves is server cost. The thing is, the Rails server does not need a lot of data in order to function properly, so server costs are low. Also, Firebase might become a cost if the user base grows but again, not much data needs to be stored there so that might happen only over time and incrementally. The big problem that is solved is a server cost associated to streaming. Up until recently, the only way to do streaming was through an intermediary server. With the peer-to-peer approach we can basically eliminate it entirely, reducing these costs to 0. Even as far as a user data consumption is concerned, the WebRTC standard offers great compression and is really well optimized for video streaming so it should really not consume much data. At the end of the day, all these new technologies and standards could help a company keep the cost low, and by this automatically lowering the price of the platform for the end user.
+
+Last but not least, libraries like VueJS allows for easy maintainability and code swapping. If one part of the product becomes deprecated or there do exist better alternatives, the only required modifications are to the specific component encapsulating that feature. Code reusability is also encouraged by using high-order and dumb components, allowing for example to use the exact same chat component both in the streamer's view and in the watcher's view, without the need to write it multiple times.
+
+
+
+# Bibliography
+
+
+
+To be continued
