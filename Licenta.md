@@ -19,7 +19,7 @@ Supervisor:
 
 Bogdan Pop
 
-
+Sterca Adrian
 
 Author:
 
@@ -41,8 +41,7 @@ This paper presents a concept platform that allows its users to create different
 
 
 
-This paper is structured as follows. Chapter 1 provides an introduction, the motive behind creating this application and why this solution is needed. Chapter 2 presents a thorough analysis of ~~some current~~ possible solutions to the problem described in Chapter 1~~, and analyses their issues and faults~~. Chapter 3 goes through the main solutions introduced by the application and why they are superior to current solutions. Chapter 4 presents the application ~~in details, both~~ from a theoretical aspect and from a practical aspect~~,~~ while providing samples of code throughout. Chapter 5 brings a conclusion and a short summary of the solution presented while Chapter 6 contains the bibliography and inspiration used for the paper.
-@TStupariu de corectat mai sus modificarile.
+This paper is structured as follows. Chapter 1 provides an introduction, the motive behind creating this application and why this solution is needed. Chapter 2 presents a thorough analysis of possible solutions to the problem described in Chapter 1. Chapter 3 goes through the main solutions introduced by the application and why they are superior to current solutions. Chapter 4 presents the application both from a theoretical aspect and from a practical aspect while providing samples of code throughout. Chapter 5 brings a conclusion and a short summary of the solution presented while Chapter 6 contains the bibliography and inspiration used for the paper.
 
 
 
@@ -53,8 +52,8 @@ This paper is structured as follows. Chapter 1 provides an introduction, the mot
 
    1.1 Problem definition
 
-   	1.2 Web based graphics and server-less streaming
-
+   	1.2 Web based graphics and WebRTC P2P Video Streaming
+   	
    	1.3 General description and personal contribution
 
 2. Current Theoretical Approaches
@@ -62,9 +61,9 @@ This paper is structured as follows. Chapter 1 provides an introduction, the mot
    2.1 Graphics and virtual boards
 
    	2.2 Streaming approaches
-
+   	
    	2.3 Problems with current solutions
-
+   	
    	2.4 Solution to the problems
 
 3. Benefits of proposed solution
@@ -74,38 +73,42 @@ This paper is structured as follows. Chapter 1 provides an introduction, the mot
    4.1 Functionalities
 
    	4.2 Design
-
+   	
    		4.2.1 Backend Server
-
+   	
    		4.2.2 Database
-
+   	
    		4.2.3 Streaming Solution
-
+   	
    		4.2.4 Web Graphics
-
+   	
    		4.2.5 Serverless Computing
-
+   	
    		4.2.6 UI and Front-end
-
+   	
    	4.3 Implementation
-
+   	
    		4.3.1 Backend Server
-
+   	
    		4.3.2 Database
-
+   	
    		4.3.3 Streaming Solution
-
+   	
    		4.3.4 Web Graphics
-
+   	
    		4.3.5 Serverless Computing
-
+   	
    		4.3.6 UI and Front-end
-
+   	
    	4.4 Validation and Testing
-
+   	
    	4.5 Personal Contribution
 
 5. Conclusion
+
+   5.1 Drawing the line
+
+   5.2 Future directions
 
 6. Bibliography
 
@@ -130,29 +133,43 @@ This paper is structured as follows. Chapter 1 provides an introduction, the mot
 
 
 
-Collaboration and remote teaching tools have existed for a long time, but they have always been platform dependent or hard to use. [@TStupariu adresarea ar trebuie sa fie impersonala. In loc de "A lot of what **we're**" ai putea rescrie gen: Nowadays, internet plays an intrinsic/central part of a person's daily routine, so it is just a matter...] A lot of what we're doing on a day to day basis is on the internet, so it was just a matter of time until collaboration tools would go to a web only approach. The problem of drawing graphics on the web has always existed and different solutions have been available for some time now. One of the most popular ones, ~~have been around like~~ Adobe Flash, was not always reliable and ~~lately they have been lacking support~~ has received limited support and development in recent years. Since the introduction of HTML5, a new element was added called "canvas" and along with it an API you can interact with using JavaScript.
-[@TStupariu ar trebui sa pui referinte la claimurile astea. gen lack of support, poti inclusiv articole in care Apple spune ca nu o sa suporte veci flash pentru ca e security risk si consuma f multe resurse, si chiar poti dezvolta un paragraf extra pe tema asta, si mai ai juma de pagina]
+Collaboration and remote teaching tools have existed for a long time, but they have always been platform dependent or hard to use. [@TStupariu adresarea ar trebuie sa fie impersonala. Nowadays, the internet represents a key part of people's lives and integrates with them more than ever, so it was just a matter of time until collaboration tools would go to a web only approach. The problem of drawing graphics on the web has always existed and different solutions have been available for some time now. One of the most popular ones,  Adobe Flash, was not always reliable and has received limited support and development in recent years. Since the introduction of HTML5, a new element was added called "canvas" and along with it an API you can interact with using JavaScript.
 
+[Apple on Flash]: https://www.apple.com/hotnews/thoughts-on-flash/	"Why Apple left Flash behind"
+
+> Third, there’s reliability, security and performance.
+>
+> Symantec recently highlighted Flash for having one of the worst security records in 2009. We also know first hand that Flash is the number one reason Macs crash. We have been working with Adobe to fix these problems, but they have persisted for several years now. We don’t want to reduce the reliability and security of our iPhones, iPods and iPads by adding Flash.
+>
+> In addition, Flash has not performed well on mobile devices. We have routinely asked Adobe to show us Flash performing well on a mobile device, any mobile device, for a few years now. We have never seen it. Adobe publicly said that Flash would ship on a smartphone in early 2009, then the second half of 2009, then the first half of 2010, and now they say the second half of 2010. We think it will eventually ship, but we’re glad we didn’t hold our breath. Who knows how it will perform?
 
 Another problem has been streaming while keeping costs down. Big platforms like Twitch have been doing it using intermediate servers to handle the stream data and distribution, but for small groups of people this is a really costly solution, since the processing power required by the servers in incredibly high. [@TStupariu si aici ar merge citare, eventual mai multe exemple]
 
+[Netflix and P2P]: https://gigaom.com/2014/03/21/what-if-netflix-switched-to-p2p-for-video-streaming/	"Theoretical usecase for Ntefliex of P2P Video Streams"
 
+> First of all, by getting the data from the first user, the  second subscriber wouldn’t access *House of Cards* from Netflix’s servers, which would mean that in total, about the same amount of data would change hands. And in reality, there wouldn’t just be two people watching the same content, but likely thousands
+
+[RTMP and WebRTC comparison]: https://blog.red5pro.com/rtmp-webrtc-which-protocol-live-streaming-app/	"A Comparison Between WebRTC and RTMP"
+
+> WebRTC is a modern protocol supported by modern browsers. It uses UDP, allows for quick lossy data transfer as opposed to RTMP which is TCP based. WebRTC has very high security built right in with DTLS and SRTP for encrypted streams, whereas basic RTMP is not encrypted. There are many other advantages to using WebRTC over RTMP, but it's not always the right choice.
 
 Combining the two, remote learning and teaching has always been a bit of a challenge, and this platform aims to make it easy to use and integrate seamlessly in the day-to-day life of its users, while also providing enough tools for someone to manage to be productive using the app.
 
 
 
-## 1.2 Web Based Graphics and Serverless Streaming
+## 1.2 Web Based Graphics and WebRTC P2P Video Streaming
 
 
 
-Drawing graphics on the web isn't really a challenge anymore, the problem comes when you have to add user interaction. Just displaying shapes has always been decently easy, but making a user dynamically draw shapes is not the easiest of tasks. Further more [@TStupariu Also e mai scurt decat further more / moreover, si nu e la fel de scientific :)) ... daca pui variante mai lungi in toata licenta, mai prinzi si cateva randuri, poate o pagina in plus], former solutions involved plugins [@TStupariu poti mentiona plugins, eventual un screenshot cu dificultati de instalare etc, poti duce chiar la extrem cu un screenshot cu un browser plin de toolbars de acu cativa ani buni cand lumea tot dadea install install install si apoi nu mai mergea nimic] which some users may not have installed or it may confuse a user about why the platform does not seem to work. This solution provides a general solution using a standard provided by HTML itself.
+Drawing graphics on the web isn't really a challenge anymore, the problem comes when you have to add user interaction. Just displaying shapes has always been decently easy, but making a user dynamically draw shapes is not the easiest of tasks. Further more, former solutions involved plugins which some users may not have installed or it may confuse a user about why the platform does not seem to work. This solution provides a general solution using a standard provided by HTML itself.
 
 
 
-[@TStupariu cred ca e mai bine sa folosesti peer-to-peer / P2P, atat in text cat si in title la capitol / subcapitol ] Serverless streaming, or peer-to-peer streaming is also a new idea on the web. P2P file transfers have existed for a long time, but just recently there has been introduced a standard for managing such connections that also support data, video and audio streams in the form of WebRTC P2P streaming. This is a standard/API that can easily be accessed by JavaScript on the web, providing a general solution for any user on any platform, without requiring extra plugins or intermediate servers ti handle the data, which might introduce more latency in the stream feed.
+![ximg_559f5e897a1c0.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.KniA4YevUK](assets/ximg_559f5e897a1c0.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.KniA4YevUK.png)
 
-[@TStupariu pun aici ca e in context, dar chestia asta o poti dezvolta intrun subcapitol la final, future directions sau ceva de genul asta, unde folosind tehnologiile din licenta, combinat cu Electron https://electronjs.org poti oferi solutia ca aplicatie desktop pe Windows / Linux / Mac]
+
+
+WebRTC peer-to-peer video streaming is also a new idea on the web. Peer-to-peer file transfers have existed for a long time, but just recently there has been introduced a standard for managing such connections that also support data, video and audio streams in the form of WebRTC P2P streaming. This is a standard/API that can easily be accessed by JavaScript on the web, providing a general solution for any user on any platform, without requiring extra plugins or intermediate servers to handle the data, which might introduce more latency in the stream feed.
 
 
 
@@ -165,15 +182,14 @@ This application provides a simple to use web client accessible by any user thro
 
 
 I have personally developed the API for the web client and implemented the authentication, database structure and back-end logic. Also, I created the web client and layout of the interface. The logic behind signalling peers and live chat has been implemented from scratch, as well as all the tools for drawing on the canvas combined with the user interaction with these tools.
-@TStupariu aici la personal contributions e cam singurul loc unde poti folosi adresari personale.
 
 
 
 # 2. Current Theoretical Approaches
 
-@TStupariu Exista doar concepte teoretice sau si solutii practice? Daca exista si parte practica ar merita un subcapitol in 2.
 
-This chapter describes the most used current approaches to the problem. It also goes a little bit into each approach and its downsides for ~~our nu prea merge, ca esti doar tu~~ the goal of achieving a low cost and easy to use streaming and drawing learning platform.
+
+This chapter describes the most used current approaches to the problem. It also goes a little bit into each approach and its downsides for the goal of achieving a low cost and easy to use streaming and drawing learning platform.
 
 
 
@@ -183,14 +199,19 @@ Currently there are multiple other approaches for drawing on a blank canvas on t
 
 SVG graphics work pretty well performance-wise. Moreover, since they are vector graphics they scale really well. The problem is that graphics display is not the only requirement. Allowing users to create them is also extremely important. Such advanced SVG tooling is trickier at best. The handling of shapes, text or other types of primitive graphics is harder to implement and doesn't make too much sense in a SVG environment.
 
-Flash could be a viable option, but it is an old technology that has started to lack support in the recent years. First and foremost, users do need a plugin for running flash applications which makes it much less user friendly. Secondly, Flash's developer, Adobe, responsible for building, maintaining and supporting the technology has released statements that Flash support will be dropped by the year 2020 [https://support.google.com/chrome/answer/6258784?co=GENIE.Platform%3DDesktop&hl=en].
-@TStupariu linkul de mai sus nu e bun ca referinta. E gen stack overflow sau wikipedia. daca intri pe link, dai de altul: https://www.blog.google/products/chrome/saying-goodbye-flash-chrome/ si apoi dai de alt link: https://blogs.adobe.com/conversations/2017/07/adobe-flash-update.html Noah asta ultimul e referinta calumea. Din referinte dinastea poti lua si bucati de text, reformula etc sa pui mai detaliat explicatii in licenta...
+Flash could be a viable option, but it is an old technology that has started to lack support in the recent years. First and foremost, users do need a plugin for running flash applications which makes it much less user friendly. Secondly, Flash's developer, Adobe, responsible for building, maintaining and supporting the technology has released statements that Flash support will be dropped by the year 2020. The things that made Flash stand out in the earlier days is most of the  times no longer unique or needed since other web standards have come to take their spot.
+
+[Adobe drops Flash support]: https://theblog.adobe.com/adobe-flash-update/	"Flash Dropped by Adobe"
+
+> But as open standards like HTML5, WebGL and WebAssembly have matured over the past several years, most now provide many of the capabilities and functionalities that plugins pioneered and have become a viable alternative for content on the web. Over time, we’ve seen helper apps evolve to become plugins, and more recently, have seen many of these plugin capabilities get incorporated into open web standards. Today, most browser vendors are integrating capabilities once provided by plugins directly into browsers and deprecating plugins.
 
 
 
 ## 2.2 Streaming Approaches
 
-Streaming in general is an action that requires a lot of resources, both computational and network ones. Traditionally, streaming has been done through standalone servers user exactly for that purpose. While they do produce decent scalability for a big number of concurrent users trying to watch a stream they also introduce a couple problems with the main one being high costs. The server cost is highest since it is a resource hungry activity. Therefore maintenance and scalability can be quite costly. Further more, since this application is made for small rooms of people it will not directly benefit from the ability to handle a great amount of users watching a stream at the same time.
+Streaming in general is an action that requires a lot of resources, both computational and network ones. Traditionally, streaming has been done through standalone servers used exactly for that purpose. While they do produce decent scalability for a big number of concurrent users trying to watch a stream they also introduce a couple problems with the main one being high costs. The server cost is highest since it is a resource hungry activity. Therefore maintenance and scalability can be quite costly. Further more, since this application is made for small rooms of people it will not directly benefit from the ability to handle a great amount of users watching a stream at the same time.
+
+[Cost of building a website like Twitch]: https://themindstudios.com/blog/how-much-does-it-cost-to-build-a-streaming-website-like-twitch-tv/	"Twitch Costs"
 
 
 
@@ -198,7 +219,7 @@ Streaming in general is an action that requires a lot of resources, both computa
 
 
 
-Current solutions are either too old, cumbersome or expensive to implement and maintain. Server resources are expensive, and the more processing that can be done on the client, the cheaper the maintenance cost of the application will be. Having more servers and nodes that a stream has to pass through can also introduce more latency long the line. ~~Also replace :)~~, making the user interaction as straight-forward as possible is not so easy using these technologies.
+Current solutions are either too old, cumbersome or expensive to implement and maintain. Server resources are expensive, and the more processing that can be done on the client, the cheaper the maintenance cost of the application will be. Having more servers and nodes that a stream has to pass through can also introduce more latency along the line. Basically, making the user interaction as straight-forward as possible is not so easy using these technologies.
 
 
 
@@ -206,9 +227,9 @@ Current solutions are either too old, cumbersome or expensive to implement and m
 
 
 
-Each problem has a solution. Graphics are the starting point. The release of HTML5 has brought a new element: canvas with an API that allows advanced programming. It offers developers an editable area that does not rely on a DOM for creating graphics. It also needs no other external tool or extension. The interaction and drawing rely solely on the browser's Javascript engine. Its main advantages are ease of use and the effortless user interaction it can provide. ~~Also synonym here~~ this API offers an easy way to capture a video stream of the actions and graphics being drawn.
+Every problem has a solution. Graphics are the starting point. The release of HTML5 has brought a new element: canvas with an API that allows advanced programming. It offers developers an editable area that does not rely on a DOM for creating graphics. It also needs no other external tool or extension. The interaction and drawing rely solely on the browser's Javascript engine. Its main advantages are ease of use and the effortless user interaction it can provide. Furthermore, this API offers an easy way to capture a video stream of the actions and graphics being drawn in real time.
 
-For the streaming part, the solution for expensive server resources is eliminating servers all together. WebRTC P2P video streaming is a technology optimised for streaming data, including video, between multiple peers directly. This way, the system only needs a server for signalling clients when a connection offer is coming, but no actual video stream data passes through it. The connection for the video stream is made directly between the 2 clients' browsers, minimising the server resources needed.
+For the streaming part, the solution for expensive server resources is eliminating servers all together. WebRTC P2P video streaming is a technology optimised for streaming data, including video, between multiple peers directly. This way, the system only needs a server for signalling clients when a connection offer is incoming, but no actual video stream data passes through it. The connection for the video stream is made directly between the 2 clients' browsers, minimising the needed server resources.
 
 
 
@@ -216,11 +237,11 @@ For the streaming part, the solution for expensive server resources is eliminati
 
 
 
-This chapter a few of the benefits introduced by the proposed solution that help solve the problems mentioned before.
+This chapter explains a few of the benefits introduced by the proposed solution that help solve the problems mentioned before.
 
 
 
-First of all, the server API is made with technologies which are really fast to develop and implement. Ruby on Rails is a really good environment for developing applications quickly without too much hustle. Second, the JavaScript library used is VueJS, which provides huge amounts of ~~customizability not a word, reword the sentence ~~ and speed, rendering only the parts it needs in a single page application form. Firebase allows for easy communication using sockets and the canvas and WebRTC protocols allow for a cross-platform solution that works in all browsers from desktop to mobile platforms allowing all types of users to watch video streams.
+First of all, the server API is made with technologies which are really fast to develop and implement. Ruby on Rails is a really good environment for developing applications quickly without too much hustle. Second, the JavaScript library used is VueJS which provides huge amounts of flexibility and speed, rendering only the parts it needs in a single page application form. Firebase allows for easy communication using sockets and the canvas and WebRTC protocols allow for a cross-platform solution that works in all browsers from desktop to mobile platforms allowing all types of users to watch video streams.
 
 
 
@@ -228,7 +249,7 @@ First of all, the server API is made with technologies which are really fast to 
 
 
 
-This chapter goes in depth into describing the applications and all the core components that make the while platform work the way it should.
+This chapter goes in depth into describing the applications and all the core components that make the whole platform work the way it should.
 
 
 
@@ -237,6 +258,12 @@ This chapter goes in depth into describing the applications and all the core com
 
 
 This first thing a user sees when going onto the platform is a login screen where he can create/sign into an already existing account. This is the only way to use the platform and confirm his identity, through a secure authentication form.
+
+
+
+![Screen Shot 2018-06-09 at 17.40.31](assets/Screen Shot 2018-06-09 at 17.40.31.jpg)
+
+
 
 Next, a user has 2 options. Either browse the already existing rooms, or create his own. In case he wants to create one, there's a simple form where he has to input some details, and if he wants to make a private room, he also has to set a password. Afterwards, he will be redirected to that specific room's page. In case he wants to join an existing room, he has to browse to his preferred one, and click to join. If the room is private, he'll be required to input the password corresponding to that room.
 
@@ -260,9 +287,15 @@ This sub chapter describes the theoretical aspects and the tools used for creati
 
 
 
-The language used for handling all the back-end logic is Ruby, in conjunction with the Rails framework. It works as a stand alone API, allowing for future integration with mobile, desktop or any other type of client. Ruby is a dynamic, interpreted, reflective, object-oriented programming language designed and developed in the 1990s. While it can work as a standalone programming language, it's popularity has really grown with the rise of Rails, a framework for easy and rapid development of web applications. The current iteration of Ruby used in this project is Ruby 2.3.3, while Rails' version is 5.1.4 . Rails is a server-side web application framework that uses a general MVC pattern for data transmission.
+[Ruby on Rails]: http://guides.rubyonrails.org/	"Documentation"
 
-The way Ruby on Rails uses MVC in this project is as follows: The model properties are being defined in migrations, while different limitations and validations on those properties are done into their own file. Using these models that automatically map to the tables in the database using the Active Record pattern, the controller receives all inbound HTTP requests and handles the data, later returning that data to the view in JSON format.
+The language used for handling all the back-end logic is Ruby, in conjunction with the Rails framework. It works as a stand alone API allowing for future integrations with mobile, desktop or any other type of client. Ruby is a dynamic, interpreted, reflective, object-oriented programming language designed and developed in the 1990s. While it can work as a standalone programming language, its popularity has really grown with the rise of Rails, a framework for easy and rapid development of web applications. The current iteration of Ruby used in this project is Ruby 2.3.3, while Rails' version is 5.1.4 . Rails is a server-side web application framework that uses a general MVC pattern for data transmission.
+
+[Ruby on Rails for startups]: https://medium.com/@RubyGarage/what-are-the-benefits-of-using-ruby-on-rails-for-your-startup-f3d6f6b9938d	"Why choose ROR"
+
+> Startup friendly, flexible, well-supported — what else can we add about Ruby on Rails framework? A bunch of successful startups can tell you why they prefer using Ruby on Rails to build their websites. In the programming world, Ruby on Rails is strongly associated with startups.
+
+The way Ruby on Rails uses MVC in this project is as follows: The model properties are being defined in migrations while different limitations and validations on those properties are done into their own file. Using these models that automatically map to the tables in the database using the Active Record pattern, the controller receives all inbound HTTP requests and handles the data, later returning the result to the view in JSON format.
 
 
 
@@ -270,7 +303,7 @@ The way Ruby on Rails uses MVC in this project is as follows: The model properti
 
 
 
-One advantage and feature that makes Ruby on Rails stand out from other frameworks and helps in creating a really agile development environment is its convention over configuration philosophy. This is a software design paradigm that aims to reduce the amount of tedious decisions a developer has to take in order to increase the time allocated for developing actually important features. This way, a lot of things like views, controllers and models are't tied together using import statements, dependency injection or other techniques. Instead, their are connected through naming conventions. These conventions will speed up development, keep the code concise and readable and, most important, these conventions allow you an easy navigation inside your application.
+One advantage and feature that makes Ruby on Rails stand out from other frameworks and helps in creating a really agile development environment is its convention over configuration philosophy. This is a software design paradigm that aims to reduce the amount of tedious decisions a developer has to take in order to increase the time allocated for developing actually important features. This way, a lot of things like views, controllers and models aren't tied together using import statements, dependency injection or other techniques. Instead, they are connected through naming conventions. These conventions will speed up development, keep the code concise and readable and most important, these conventions allow you an easy navigation inside your application.
 
 [Convention over Configuration]: https://rubyonrails.org/doctrine/#convention-over-configuration	"Deisgn Choices - David Heinemeier Hansson"
 
@@ -280,11 +313,15 @@ One advantage and feature that makes Ruby on Rails stand out from other framewor
 
 The mapping between the controller actions and the HTTP requests is done using a routing module that redirects every inbound request to its corresponding controller method. This application uses a combination of GET and POST requests in order to handle all CRUD (Create-Read-Update-Delete) operations.
 
-Authentication is another point being handled by the server. The application uses a gem called devise-jwt, allowing for easy authentication using JSON Web Tokens. This provides a really adaptable authentication scheme, being able to wokr on the web, mobile, desktop, and virtually any platform a client would be on. The passwords are hashed and salted when stored in the database, so that at no time the application knows the actual credentials of a user. This module also allows for future expansion, supporting social media authentication using Google, Facebook or other providers.
+[Devise Authentication Setup]: https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03	"Authentication setup"
 
-The transfer of data from the server is done through views which contain JSON strings. These strings are rendered using a gem called Jbuilder. Jbuilder gives a user a simple DSL for declaring JSON structures, coming in handy especially in places where you are working with big and complicated data structures. It can loop through your structure and create a dynamic model for transmitting the data.
+Authentication is another point being handled by the server. The application uses a gem called devise-jwt allowing for easy authentication using JSON Web Tokens. This provides a really adaptable authentication scheme that is able to work on the web, mobile, desktop, and virtually any platform a client would be on. The passwords are hashed and salted when stored in the database so that at no time the application knows the actual credentials of a user. This module also allows for future expansion, supporting social media authentication using Google, Facebook or other providers.
 
-This being an API, it has to be able to support CORS (Cross-Origin Resource Sharing). Without it, a web app could not work in browsers like chrome, since the server and the client would not be on the same server. The gem rack-cors allows you to easily enable this functionality through header alteration, while also making it easy to restrict to certain domains.
+[JSON Rendering]: https://jbuilder.readthedocs.io/en/latest/	"JSON with JBuilder"
+
+The transfer of data from the server is done through views which contain JSON strings. These strings are rendered using a gem called Jbuilder. This extension gives a user a simple DSL for declaring JSON structures, coming in handy especially in places where you are working with big and complicated data structures. It can loop through your structure and create a dynamic model for transmitting the data.
+
+This being an API, it has to be able to support CORS (Cross-Origin Resource Sharing). Without it, a web app could not work in browsers like chrome, since the server and the client would not be on the same server. The gem rack-cors allows you to easily enable this functionality through header alteration while also making it easy to restrict to certain domains.
 
 
 
@@ -292,11 +329,21 @@ This being an API, it has to be able to support CORS (Cross-Origin Resource Shar
 
 
 
-The application currently uses a simple file-based database called SQLite. It is ideal for development, since setup takes virtually no time at all, especially since Rails uses it as a default database. SQLite is a relational database management system contained in the C language. It being embedded in the application itself, without the need of a server has both advantages and disadvantages. The bad part is that the size of it can grow quickly and can become a burden for your back-end server. On the bright side, it is really portable, easy to setup and makes for a great tool during the development process.
+[SQLite use cases]: https://www.sqlite.org/whentouse.html	"SQLite Usage"
+
+The application currently uses a simple file-based database called SQLite. It is ideal for development since the setup takes virtually no time at all, especially since Rails uses it as a default database. SQLite is a relational database management system contained in the C language. It being embedded in the application itself, without the need of a server has both advantages and disadvantages. The bad part is that the size of it can grow quickly and can become a burden for your back-end server. On the bright side it is really portable, easy to setup and makes for a great tool during the development process.
+
+
+
+![Screen Shot 2018-06-09 at 18.50.50](assets/Screen Shot 2018-06-09 at 18.50.50.jpg)
+
+
+
+[Active Record]: https://medium.com/@thejasbabu/activerecord-the-heart-of-rails-fe977d1d4125	"Data Layer"
 
 One big advantage of Rails is that it makes it painless to migrate to another relational database system. It uses an abstraction layer over your database so that you never have to manually write SQL queries or modify tables. If you decide to switch to another database system like PostgreSQL you simply have to modify a couple configuration files. The abstraction layer is called Active Record and it is based on a pattern carrying the same name. In a nutshell, what it does is it maps every single table to an entity that is globally available throughout the application controllers, this way also removing the need for separate repositories.
 
-Another big helper flexibility-wise are ActiveRecord Migrations. They provide a code-first database building workflow which allows you do gradually modify the database and provides an easy way of reverting back to older versions of the database. Also, you do not have to manually migrate databases from computer to computer, making the database creation and seeding just a terminal command away.
+Another big helper flexibility-wise are ActiveRecord Migrations. They provide a code-first database building workflow which allows you to gradually modify the database and provides an easy way of reverting back to older versions of it. Also, one do not have to manually migrate databases from computer to computer, making the database creation and seeding just a terminal command away and facilitating versioning of the Database together with the server.
 
 
 
@@ -304,7 +351,11 @@ Another big helper flexibility-wise are ActiveRecord Migrations. They provide a 
 
 
 
-In order for the app to allow a user to stream the content of a canvas it uses a streaming standard called WebRTC. WebRTC is an open source project aimed to provide browsers and mobile applications an easy access to Real Time Communication capabilities via APIs. The part of this technology used by this application is Peer-To-Peer Video Streaming, allowing video streams between users without the data needing to pass through intermediary servers. How it currently works is that the peers are creating a unique id, then using a simple signaling server made for letting peers know about each other it makes the connection between clients and starts the video stream. Current supported platforms include Google Chrome, Firefox, Opera, Android and IOS, but many more browsers seek to adopt it. Also, this technology is optimized for data streams, this way keeping a smaller footprint on your network traffic while keeping the stream quality high.
+[State of WebRTC Video Streaming]: http://www.streamingmedia.com/Articles/Editorial/Featured-Articles/The-State-of-WebRTC-and-Streaming-Media-2018-124068.aspx	"WebRTC Video Streaming"
+
+In order for the platform to allow a user to stream the content of a canvas it uses a streaming standard called WebRTC. WebRTC is an open source project aimed to provide browsers and mobile applications an easy access to Real Time Communication capabilities via APIs. The part of this technology used by this application is Peer-To-Peer Video Streaming, allowing video streams between users without the data needing to pass through intermediary servers. How it currently works is that the peers are creating a unique id then using a simple signalling server made for letting peers know about each other, afterwards making the connection between clients and starting the video stream. Current supported platforms include Google Chrome, Firefox, Opera, Android and IOS, but many more browsers seek to adopt it. Furthermore, this technology is optimised for data streams, this way keeping a smaller footprint on your network traffic while keeping the stream quality high.
+
+[Simple Peer]: https://github.com/feross/simple-peer	"Simple Peer wrapper"
 
 The application also uses a wrapper over this standard in the form of a JavaScript library called simple-peer. This provides a simpler to use API for communicating between peers and a default server for the peers to get their unique ids. This wrapper supports both data streams and video/voice streams.
 
@@ -314,11 +365,21 @@ The application also uses a wrapper over this standard in the form of a JavaScri
 
 
 
-A user has to be able to draw things somewhere in order to stream them, and in order to do that it will be using an HTML Canvas element. This element exposes an API that can be interpretted with JavaScript, allowing a user to draw or write on a virtual board.
+[HTML5 Canvas]: https://medium.com/@AmyScript/introduction-to-html5-canvas-8c1bad20e855	"Intro to canvas"
 
-Rather than using the native API, the application uses a wrapper for drawing certain types of shapes, text or images. FabricJS is a library made for displaying graphics easier on a canvas element. It also allows setting different behaviors of elements like drag and drop or rotation. The difference between this and the lower level API a Canvas element provides is that it abstracts all the elements into an object-oriented style. This way, anything you draw will become a simple JavaScript object with properties, allowing for easier management and drawing of graphics.
+A user has to be able to draw things somewhere in order to stream them and in order to do that it will be using an HTML Canvas element. This element exposes an API that can be interpreted with JavaScript, allowing him to draw or write on a virtual board.
 
-While FabricJS does provide a more intuitive way of drawing and manipulation objects in an image, the actual process of defining where to draw items on a canvas has to baa handled separately. Currently it is done using a combination of JavaScript event handlers for figuring out the state of the mouse on a canvas. This way, it can easily detect when a user clicks, drags or holds an element and react accordingly while drawing the shapes. All the mechanics for drawing had to be implemented from scratch since they need to be really customizable dependent on what the drawn item is.
+[FabricJS]: http://fabricjs.com/docs/	"Canvas wrapper"
+
+Rather than using the native canvas API, the application uses a wrapper for drawing certain types of shapes, text or images. FabricJS is a library made for displaying graphics easier on a canvas element. It also allows setting different behaviours of elements like drag and drop or rotation. The difference between this and the lower level API a Canvas element provides is that it abstracts all the elements into an object-oriented style. This way anything you draw will become a simple JavaScript object with properties, allowing for easier management and drawing of graphics.
+
+While FabricJS does provide a more intuitive way of drawing and manipulation objects in an image, the actual process of defining where to draw items on a canvas has to be handled separately. Currently it is done using a combination of JavaScript event handlers for figuring out the state of the mouse on a canvas. This way, it can easily detect when a user clicks, drags or holds an element and react accordingly while drawing the shapes. All the mechanics for drawing had to be implemented from scratch since they need to be really customisable dependent on what the drawn item is.
+
+
+
+![Screen Shot 2018-06-09 at 19.15.16](assets/Screen Shot 2018-06-09 at 19.15.16.jpg)
+
+
 
 Also, in order to get a stream from the Canvas element, the application uses an HTML5 API called captureVideoStream. This allows you to set a target framerate to capture depending on your internet connection and requirements and pass it onwards to the WebRTC connection in order to be streamed onwards. Also, it combines an audio feed from the microphone, so that users can also hear explanations offered by a teacher.
 
@@ -328,11 +389,13 @@ Also, in order to get a stream from the Canvas element, the application uses an 
 
 
 
-Some of the features provided are available using a technology called Firebase. To name them exactly, the Chat and the Signalling Server are both made using the Firebase Real-Time Database. The Firebase Real time Database is a database hosted in the cloud that stores information in JSON format. Being Real-Time, it constantly synchronizes with other connected clients using sockets and event listeners.
+[Firebase]: https://medium.com/@limhenry/why-i-love-firebase%EF%B8%8F-and-what-is-firebase-%EF%B8%8F-96b54509d450	"Firebase"
 
-For the application chat, this technology is useful since you don't have to implement a socket interface from scratch. Also, all communications are done without using the server, just Firebase. By attaching an event listener to certain nodes of the JSON structure, a client is automatically notified of a change if another client decides to alter the structure of that node or the nodes below.
+Some of the features provided are available using a technology called Firebase. To name them exactly, the Chat and the Signalling Server are both made using the Firebase Real-Time Database. The Firebase Realtime Database is a NoSQL database hosted in the cloud that stores information in JSON format. Being Realtime, it constantly synchronises with other connected clients using sockets and event listeners.
 
-Firebase also comes into help for peer signaling. In order for 2 clients to connect and establish the stream, they need to first know about each other and accept each other's offers. For this, there is a certain sequence to follow starting from the initiator of the stream, and Firebase allows clients to automatically be notified when an offer or answer is present and react according to that. This eliminates the need for implementing a socket interface or for HTTP polling, making the connection easier and faster.
+For the application chat, this technology is useful since you don't have to implement a socket interface from scratch. Further more, all communications are done without using the server, just Firebase. By attaching an event listener to certain nodes of the JSON structure a client can be automatically notified of a change if another client decides to alter the structure of that node or the nodes below.
+
+Firebase also comes into help for peer signalling. In order for 2 clients to connect and establish the stream they need to first know about each other and accept each other's offers. For this, there is a certain sequence to follow starting from the initiator of the stream and Firebase allows clients to automatically be notified when an offer or answer is present and react according to that. This eliminates the need for implementing a socket interface or HTTP polling, making the connection easier and faster.
 
 
 
@@ -348,23 +411,39 @@ The client of the application is web based and uses a library called VueJS, it b
 
 
 
-It represents the perfect compromise between big frameworks like Angular 5 that contain every package you want or don't want and small packages like React, while also keeping up and out-performing traditional frameworks. It uses a component based system, allowing for easy re-rendering and communication between different parts of the application.
+It represents the perfect compromise between big frameworks like Angular 5 that contain every package one might want or don't want and small packages like React while also keeping up and out-performing traditional frameworks. It uses a component based system, allowing for easy re-rendering and communication between different parts of the application.
 
-In order to not have to design every component from scratch the system uses a Material Design based library called Vuetify. Other than providing an intuitive way to customize theming and elements, it also provides a a grid system for designing complicated layouts. It is inspired by the 12-column Bootstrap grid while also having some extra Material Design specific elements. Material Design is a design language and guideline developed in 2014 by Google, expanding on the card based interface that was first introduced in Google Now. It provides a clean and minimalistic look for components while keeping functionality richness and a clean user experience. Also, a great part of Vuetify components is their high reusability, allowing to duplicate elements across different parts of the website while retaining design and behavior.
 
-In order to communicate with the Ruby on Rails server, vBoard uses a JavaScript library called Axios. Its advantage over native APIs such as fetch is that is provides a cleaner interaction and also it supports intercepting requests in order for transformation of attributes like headers. Also, the code used for making an HTTP request is much smaller in size, allowing for a more friendly representation between lines of code.
 
-Another part from where the client gets its data is Firebase. On the web there are currently 2 ways of communicating with a Firebase Real-Time Database, one being using HTTP requests, while the other being using their proprietary SDK. The advantage of the SDK is that is allows for easy subscription to their event listener system, so that updates to the database are automatically transmitted to all clients. Also, Firebase uses a caching system where it caches all the data between requests except for the first one, to allow for faster transfers. The SDK is easy to setup using just a configuration file and it provides a service-like system of interaction.
+![maxresdefault](assets/maxresdefault.jpg)
 
-Since it is developed as a Single Page Application, the usage of a router is required for navigating between pages and components. This is why the app is using the officially supported library for routing called vue-router. It provides a way for dynamically displaying components dependent on the user interaction. Also, different guards can be set on routes so that a user is forced to authenticate before accessing certain parts of the system.
+
+
+[Material Design]: https://medium.com/pilcro/should-you-use-material-design-bfb596a04bae	"Material Design"
+
+> Material Design is a unified system that combines theory, resources, and tools for crafting digital experiences.
+
+In order to not have to design every component from scratch the system uses a Material Design based library called Vuetify. Other than providing an intuitive way to customise theming and elements it also provides a a grid system for designing complicated layouts. It is inspired by the 12-column Bootstrap grid while also having some extra Material Design specific elements. Material Design is a design language and guideline developed in 2014 by Google expanding on the card based interface that was first introduced in Google Now. It provides a clean and minimalistic look for components while keeping functionality richness and a clean user experience. Another great part about Vuetify components is their high reusability allowing you to duplicate elements across different parts of the website while retaining design and behaviour without the need ti duplicate code and logic.
+
+[Axios]: https://github.com/axios/axios	"Axios"
+
+In order to communicate with the Ruby on Rails server, the platform uses a JavaScript library called Axios. Its advantage over native APIs such as fetch is that is provides a cleaner interaction and also it supports intercepting requests in order for transformation of attributes like headers. Also, the code used for making an HTTP request is much smaller in size, allowing for a more friendly representation between lines of code.
+
+Another part from where the client gets its data is Firebase. On the web there are currently 2 ways of communicating with a Firebase Realtime Database, one being using HTTP requests with the other being using their proprietary SDK. The advantage of the SDK is that is allows for easy subscription to their event listener system so that updates to the database are automatically transmitted to all clients. Also, Firebase uses a caching system where it caches all the data between requests except for the first one in order to allow for faster transfers. The SDK is easy to setup using just a configuration file and it provides a service-like system of interaction.
+
+Since it is developed as a Single Page Application, the usage of a router is required for navigating between pages and components. This is why the app is using the officially supported library for routing called vue-router. It provides a way for dynamically displaying components dependent on user interaction. Further more, different guards can be set on routes so that a user is forced to authenticate before accessing certain parts of the system, this way restricting access to certain parts of a website with more sensible data to unauthenticated users.
+
+[JWT Tokens]: https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec	"JWT"
 
 The routing and its guards are based on the HTMl localStorage API. Basically, on every request the client has to include a JSON Web Token in order to validate with the server the identity of the user. Afterwards, as a response, the client is given a different token for every request, this way increasing the security of the application. The system then stores this token in the localStorage of the page.
 
-Despite using Vuetify as a component library, there are times when classic CSS rules have to be applied in a custom manner. For this, instead of using classic CSS which has some limitations like no variables or the fact that rule selectors can become really verbose, the application uses SCSS which then gets interpreted to standard CSS. SCSS provides a syntax for shortening the CSS code you have to write while also providing useful add-ons like variables or mixins. Overall, while it does not add anything to the final user experience, the place where it really shines is in developer satisfaction, since SCSS is much easier to understand rapidly and code complicated selectors and rules.
+[SCSS]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html	"SCSS"
+
+Despite using Vuetify as a component library there are times when classic CSS rules have to be applied in a custom manner. For this, instead of using classic CSS which has some limitations like no variable support or the fact that rule selectors can become really verbose, the application uses SCSS which then gets interpreted to standard CSS. Basically, it is a Sass syntax and an extension to traditional CSS that also provides a syntax for shortening the stylesheet code you have to write while also providing useful add-ons like variables or mix-ins. Overall, while it does not add anything to the final user experience, the place where it really shines is in developer satisfaction since SCSS is much easier to understand rapidly and code complicated selectors and rules.
 
 In order to bundle all the JavaScript files together for usage in the browser, the Vue-CLI (Command Line Interface) comes with WebPack built in, this way not requiring any additional configurations or setups.
 
-There are plenty of external JavaScript packages bundled in the application and, in order to manage them all, a package manager like NPM (Node Package Manager) is used. This way, other than creating an easy way to add packages to a solution, it provides a really simple way of keeping track of all modules and their dependencies and it simplifies the way the code can be migrated from one computer to the other.
+There are plenty of external JavaScript packages bundled in the application and, in order to manage them all, a package manager like NPM (Node Package Manager) or YARN is used. This way, other than creating an easy way to add packages to a solution it also provides a really simple way of keeping track of all modules and their dependencies while simplifying the way code can be migrated from one computer to the another.
 
 
 
@@ -373,14 +452,6 @@ There are plenty of external JavaScript packages bundled in the application and,
 
 
 This chapter describes the implementation of all the technologies described above. While the theoretical parts have already been explained, this chapter's goal is to explain how these components are used and how they are tied together to create one cohesive application.
-
-
-
-## 4.3 Implementation
-
-
-
-This chapter describes how the application makes use of all the technologies presented above in order to make one smooth user experience. It explains how everything is used throughout the application and also how they all tie and communicate together.
 
 
 
@@ -626,13 +697,27 @@ In a nutshell, while the platform does use plenty of libraries and gems as wrapp
 
 
 
-This chapter goes through a brief conclusion on how the problem was solved using the above technologies and approaches.
+This chapter goes through a brief conclusion on how the problem was solved using the above technologies and approaches while also presenting some future posibilities of expansion to this entire ecosystem.
+
+
+
+## 5.1 Drawing the line
+
+
 
 First of all, the problem of platform compatibility is solved by using a web only approach. Everything is done through a web application that requires no extra plug-ins or extensions. While the Peer-to-Peer streaming solution is a new web standard that hasn't yet been adopted by all browsers, the major ones like Google Chrome and Mozilla Firefox do have it working reliably. Since every interaction is based on the HTML5 standard, basically any device, be it desktop, laptop, phone or tablet could theoretically make use of the application. While drawing on a phone might not offer an optimal experience, any browser that has support for HTML video should be able to display an incoming stream.
 
 Also, another problem this application solves is server cost. The thing is, the Rails server does not need a lot of data in order to function properly, so server costs are low. Also, Firebase might become a cost if the user base grows but again, not much data needs to be stored there so that might happen only over time and incrementally. The big problem that is solved is a server cost associated to streaming. Up until recently, the only way to do streaming was through an intermediary server. With the peer-to-peer approach we can basically eliminate it entirely, reducing these costs to 0. Even as far as a user data consumption is concerned, the WebRTC standard offers great compression and is really well optimized for video streaming so it should really not consume much data. At the end of the day, all these new technologies and standards could help a company keep the cost low, and by this automatically lowering the price of the platform for the end user.
 
 Last but not least, libraries like VueJS allows for easy maintainability and code swapping. If one part of the product becomes deprecated or there do exist better alternatives, the only required modifications are to the specific component encapsulating that feature. Code reusability is also encouraged by using high-order and dumb components, allowing for example to use the exact same chat component both in the streamer's view and in the watcher's view, without the need to write it multiple times.
+
+
+
+## 5.2 Future directions
+
+
+
+Given the nature of the technology stack being used the product suits very well for cross-platform applications. This way, while it currently functions great in Web Browsers, it would be an easy idea to implement as a native application for Android or IOS using React-Native or even as a Desktop application for MacOS, WIndows or Linux by using a framework such as ElectronJS. Since the server API would essentially be the same and the communication protocol being established the only requirement would be building the User Interface in for any of these applications. By keeping technologies as open and possible you can benefit from great community support and also, at the end of the day, with only 3 client code bases you can target over 6 platforms ( Browsers, Android, IOS, MacOS, Linux, Windows ) making the adaptability of the product really high.
 
 
 
