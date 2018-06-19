@@ -53,7 +53,7 @@ This paper is structured as follows. Chapter 1 provides an introduction, the mot
 
    1.2 Web based graphics and WebRTC P2P Video Streaming
 
-   ​	
+   ​
    1.3 General description and personal contribution
 
 2. Current Theoretical Approaches
@@ -61,9 +61,9 @@ This paper is structured as follows. Chapter 1 provides an introduction, the mot
    2.1 Graphics and virtual boards
 
    2.2 Streaming approaches
-   	
+
    2.3 Problems with current solutions
-   	
+
    2.4 Solution to the problems
 
 3. Benefits of proposed solution
@@ -79,29 +79,29 @@ This paper is structured as follows. Chapter 1 provides an introduction, the mot
       4.2.2 Database
 
       4.2.3 Streaming Solution
-   	
+
       4.2.4 Web Graphics
-   	
-      4.2.5 Serverless Computing
-   	
+
+      4.2.5 Server-less Computing
+
       4.2.6 UI and Front-end
-   	
+
    4.3 Implementation
-   	
+
       4.3.1 Backend Server
-   	
+
       4.3.2 Database
-   	
+
       4.3.3 Streaming Solution
-   	
+
       4.3.4 Web Graphics
-   	
-      4.3.5 Serverless Computing
-   	
+
+      4.3.5 Server-less Computing
+
       4.3.6 UI and Front-end
-   	
+
    4.4 Validation and Testing
-   	
+
    4.5 Personal Contribution
 
 5. Conclusion
@@ -225,7 +225,7 @@ Streaming in general is an action that requires a lot of resources, both computa
 
 
 
-Current solutions are either too old, cumbersome or expensive to implement and maintain. Server resources are expensive, and the more processing that can be done on the client, the cheaper the maintenance cost of the application will be. Having more servers and nodes that a stream has to pass through can also introduce more latency along the line. Basically, making the user interaction as straight-forward as possible is not so easy using these technologies. [7]
+Current solutions are either too old, cumbersome or expensive to implement and maintain. Server resources are expensive, and the more processing that can be done on the client, the cheaper the maintenance cost of the application will be. Having more servers and nodes that a stream has to pass through can also introduce more latency along the line, making the user interaction as straight-forward as possible is not so easy using these technologies. [7]
 
 
 
@@ -243,11 +243,11 @@ For the streaming part, the solution for expensive server resources is eliminati
 
 
 
-This chapter explains a few of the benefits introduced by the proposed solution that help solve the problems mentioned before.
+This chapter explains a few of the benefits introduced by the proposed solution that helps solve the problems mentioned before.
 
-First of all, the server API is made with technologies which are really fast to develop and implement. Ruby on Rails is a really good environment for developing applications quickly without too much hustle. Second, the JavaScript library used is VueJS which provides huge amounts of flexibility and speed, rendering only the parts it needs in a single page application form. Firebase allows for easy communication using sockets and the canvas and WebRTC protocols allow for a cross-platform solution that works in all browsers from desktop to mobile, allowing all types of users to watch video streams.
+First of all, the server API is built using technologies that are really fast to design, develop and implement. Ruby on Rails is a really good environment for developing applications quickly without too much hustle. Secondly, the JavaScript library used, VueJS, provides huge amounts of flexibility and speed. It's flagship benefit is rendering only the parts it needs in a single page application form. Firebase allows easy communication using sockets whilst the canvas and WebRTC protocols allow for a cross-platform solution that works in all browsers from desktop to mobile. In turn, this facilitates all types of users to watch video streams.
 
-The benefits have a wide range from development time which can be directly translated into cost, reduced server cost and improved quality and latency for the streams, Another key aspect in the chosen technologies is they are implemented with an agile environment in mind, allowing ideas to pivot easily and quickly adapt to new technology trends.
+The benefits have a wide range from development time which directly impacts the development costs of any project, reduced server fees and improved quality and latency for the streams. Another key aspect in the chosen technologies is they are implemented with an agile environment in mind, allowing ideas to pivot easily and quickly adapt to new technology trends. ~@TStupariu aici poti dezvolta putin pe agile, cateva paragrafe etc~
 
 # 4. Application Details
 
@@ -269,7 +269,7 @@ This first thing a user sees when going onto the platform is a login screen wher
 
 
 
-Next, a user has 2 options. Either browse the already existing rooms, or create his own. In case he wants to create one, there's a simple form where he has to input some details, and if he wants to make a private room, he also has to set a password. Afterwards, he will be redirected to that specific room's page. In case he wants to join an existing room, he has to browse to his preferred one, and click to join. If the room is private, he'll be required to input the password corresponding to that room.
+Next, a user has two options. Either browse the already existing rooms, or create his own. In case he/she ~sau folosesti o formulare impersoanala, de genul: In case a new room is created, ...~ wants to create one, there's a simple form where he has to input some details, and if ~he~ wants to make a private room, he also has to set a password. Afterwards, he will be redirected to that specific room's page. In case he wants to join an existing room, he has to browse to his preferred one, and click to join. If the room is private, he'll be required to input the password corresponding to that room.
 
 Afterwards, if he is the creator, he'll be able to go to the actual creation page, where he'll have the canvas and a chat. If he's an attendee, he'll be redirected to the view page containing the stream video and the chat.
 
@@ -311,7 +311,7 @@ The way Ruby on Rails uses MVC in this project is as follows: The model properti
 
 
 
-One advantage and feature that makes Ruby on Rails stand out from other frameworks and helps in creating a really agile development environment is its convention over configuration philosophy. This is a software design paradigm that aims to reduce the amount of tedious decisions a developer has to take in order to increase the time allocated for developing actually important features. This way, a lot of things like views, controllers and models aren't tied together using import statements, dependency injection or other techniques. Instead, they are connected through naming conventions. These conventions will speed up development, keep the code concise and readable and most important, these conventions allow you an easy navigation inside your application. [12]
+One advantage and feature that makes Ruby on Rails stand out from other frameworks and helps in creating a really agile development environment is its convention over configuration philosophy. This is a software design paradigm that aims to reduce the amount of tedious decisions a developer has to take in order to increase the time allocated for developing actually important features. This way, a lot of things like views, controllers and models aren't tied together using import statements, dependency injection or other techniques. Instead, they are connected through naming conventions. These conventions will speed up development, keep the code concise and readable and most important, these conventions allow developers to easily navigate within the application. [12]
 
 > Not only does the transfer of configuration to convention free us from deliberation, it also provides a lush field to grow deeper abstractions. If we can depend on a Person class mapping to people table, we can use that same inflection to map an association declared as has_many :people to look for a Person class. The power of good conventions is that they pay dividends across a wide spectrum of use.
 >
@@ -361,7 +361,7 @@ The application also uses a wrapper over this standard in the form of a JavaScri
 
 
 
-A user has to be able to draw things somewhere in order to stream them and in order to do that it will be using an HTML Canvas element. This element exposes an API that can be interpreted with JavaScript, allowing him to draw or write on a virtual board. [22]
+A user has to be able to draw things somewhere in order to stream them and in order to do that ~it - face referire la user, nu e ok it, nu e animal :) - the user, chiar daca se repeta ~ will be using an HTML Canvas element. This element exposes an API that can be interpreted with JavaScript. This results in a virtual board that can be drawn or written upon. [22]
 
 Rather than using the native canvas API, the application uses a wrapper for drawing certain types of shapes, text or images. FabricJS is a library made for displaying graphics easier on a canvas element. It also allows setting different behaviours of elements like drag and drop or rotation. The difference between this and the lower level API a Canvas element provides is that it abstracts all the elements into an object-oriented style. This way anything you draw will become a simple JavaScript object with properties, allowing for easier management and drawing of graphics. [23]
 
@@ -377,7 +377,7 @@ Also, in order to get a stream from the Canvas element, the application uses an 
 
 
 
-### 4.2.5 Serverless Computing
+### 4.2.5 Server-less Computing
 
 
 
@@ -561,11 +561,11 @@ For different mechanics like deleting an object when the delete key is pressed o
 
 Different items require different parameters in order to be created. Another thing to keep in mind is the order of those given parameters. Since you could draw a rectangle from left to right or the other way around, the app also keeps track of the direction of the drawn shapes in order to accurately position them on the canvas object. Another thing that needs an event listener is the color picker. This tool allows a user to select different fill colors for shapes or text colors. While it does use the default color picker embedded into most browsers, it still needs to be able to see the dynamic changes in color a user might make without reselecting the tool. This allows you to draw the same shape multiple times with a different color each time without forcing you to reselect the tool after a color change.
 
-There are multiple tools offered to a user in order to allow him to be creative in drawing the items. This first one is a brush tool which allows you to select the color and thickness. Next up is a selection tool, allowing you to select an item for rearranging it on the canvas or to mark it for deletion. 2 of the current supported shapes are rectangles and circles for which a user can specify the fill color and, in case of the circle, the stroke width. Text is a really essential tool that also provides quite a bit of customisation in the form of font size, color and allignment in the drawn container. Also one can create simple straight lines while also specifying the width of the drawn line. The canvas also has support for images, a user having to simply input the URL of the image and that will automatically be added to the canvas. The last 2 items are a deletion tool which works by first selecting the desired item to be deleted and then clicking the appropriate tool or the pre-assigned hotkey and a color picker which controls the color of the element currently being drawn.
+There are multiple tools offered to a user in order to allow him to be creative in drawing the items. This first one is a brush tool which allows you to select the color and thickness. Next up is a selection tool, allowing you to select an item for rearranging it on the canvas or to mark it for deletion. 2 of the current supported shapes are rectangles and circles for which a user can specify the fill color and, in case of the circle, the stroke width. Text is a really essential tool that also provides quite a bit of customisation in the form of font size, color and alignment in the drawn container. Also one can create simple straight lines while also specifying the width of the drawn line. The canvas also has support for images, a user having to simply input the URL of the image and that will automatically be added to the canvas. The last 2 items are a deletion tool which works by first selecting the desired item to be deleted and then clicking the appropriate tool or the pre-assigned hotkey and a color picker which controls the color of the element currently being drawn.
 
 
 
-### 4.3.5 Serverless Computing
+### 4.3.5 Server-less Computing
 
 
 
@@ -659,7 +659,7 @@ Another thing that helps manual testing is seed data. Especially during the earl
 
 
 
-Last but not least, the Rails console is a really valuable addition to the entire ecosystem. Even in the controllers, at the end of the day, every action simply executes some lines of Ruby code and ActiveRecord commands. The console allows you to do this same thing dynamically, sort of like a browser console might allow you this for JavaScript. This is a great way to initially test your database queries and CRUD (create-read-update-delete) operations. You can see the results of your queries instantly in the console and even save things directly into the database. Basically, it creates a simulated environment where it allows the developer to play around in order to find the best and most efficient queries. [42]
+Last but not least, the Rails console is a really valuable addition to the entire ecosystem. Even in the controllers, at the end of the day, every action simply executes some lines of Ruby code and ActiveRecord commands. The console allows you to do this same thing dynamically, sort of like a browser console might ~allow you~ this for JavaScript. This is a great way to initially test your database queries and CRUD (create-read-update-delete) operations. You can see the results of your queries instantly in the console and even save things directly into the database. Basically, it creates a simulated environment where it allows the developer to play around in order to find the best and most efficient queries. [42]
 
 
 
@@ -695,11 +695,11 @@ This chapter goes through a brief conclusion on how the problem was solved using
 
 
 
-First of all, the problem of platform compatibility is solved by using a web only approach. Everything is done through a web application that requires no extra plug-ins or extensions. While the Peer-to-Peer video streaming solution is a new web standard that hasn't yet been adopted by all browsers, the major ones like Google Chrome and Mozilla Firefox do have it working reliably. Since every interaction is based on the HTML5 standard, basically any device, be it desktop, laptop, phone or tablet could theoretically make use of the application. While drawing on a phone might not offer an optimal user experience, any browser that has support for HTML video should be able to display an incoming stream.
+First of all, the problem of platform compatibility is solved by using a web only approach. Everything is done through a web application that requires no extra plug-ins or extensions. While the Peer-to-Peer video streaming solution is a new web standard that hasn't yet been adopted by all browsers, the major ones like Google Chrome and Mozilla Firefox do have it working reliably ~@TStupariu aici poti dezvolta de ex, cu referinte spre paginile oficiale, dupa inspiratie pe gen https://caniuse.com/#search=canvas unde ai oricum referinte spre site-urile oficiale ~. Since every interaction is based on the HTML5 standard, basically any device, be it desktop, laptop, phone or tablet could theoretically make use of the application. While drawing on a phone might not offer an optimal user experience, any browser that has support for HTML video should be able to display an incoming stream. ~aici poti dezolva in future directions cu integrarea pentru mobile cu react-native, engine 3d etc si ce mai sunt pe deviceuri astfel incat ele sa afiseze un element nativ cu draw care sa foloeasca GPU si sa fie o experienta excelenta la nivelul unui joc de mobile...~
 
-Further more, another problem this application solves is server cost. The thing is, the Rails server does not need a lot of data in order to function properly, so server costs are low. Also, Firebase might become a cost if the user base grows but again, not much data needs to be stored there so that might happen only over time and incrementally. The big problem that is solved is the server cost associated to streaming. Up until recently, the only way to do streaming of video was through an intermediary server. With the peer-to-peer approach we can basically eliminate it entirely, reducing these costs to 0. Even as far as a user data consumption is concerned, the WebRTC standard offers great compression and is really well optimised for video streaming so it should really not consume much data. At the end of the day, all these new technologies and standards could help a company keep the cost low and by this automatically lowering the price of the platform for the end user.
+Further more, another problem this application solves is server cost. The thing is, the Rails server does not need a lot of data in order to function properly, so server costs are low. Also, Firebase might become a cost if the user base grows but again, not much data needs to be stored there so that might happen only over time and incrementally. The big problem that is solved is the server cost associated to streaming. Up until recently, the only way to do streaming of video was through an intermediary server. With the peer-to-peer approach we can basically eliminate it entirely, reducing these costs to 0. Even as far as a user data consumption is concerned, the WebRTC standard offers great compression and is really well optimised for video streaming so it should really not consume much data. At the end of the day, all these new technologies and standards could help a company keep the cost low and by this automatically lowering the price of the platform for the end user. ~TStupariu aici ar fi ideal daca ai putea gasi niste referinte. De ex, storage e oricum cel mai ieftin, proc (clasic sau GPU) e cel mai scump, si banda dedicata (nu neaparat traficul la cantitate).~
 
-Last but not least, libraries like VueJS allows for easy maintainability and code swapping. If one part of the product becomes deprecated or there do exist better alternatives, the only required modifications are to the specific component encapsulating that feature. Code reusability is also encouraged by using high-order and dumb components, allowing for example to use the exact same chat component both in the streamer's view and in the watcher's view without the need to write it multiple times.
+Last but not least, libraries like VueJS allow for easy maintainability and code swapping. If one part of the product becomes deprecated or better alternatives exist, the only required modifications are to the specific components encapsulating a particular feature. Code reusability is also encouraged by using high-order and dumb components, allowing for example to use the exact same chat component both in the streamer's view and in the watcher's view without the need to write it multiple times, facilitating coding that falls within DRY protocol ~Dont repeat yourself, eventual ceva referinte~.
 
 
 
@@ -759,4 +759,3 @@ Given the nature of the technology stack being used the product suits very well 
 [40]: https://firebase.google.com/docs/web/setup	"Add Firebase to your JavaScript Project"
 [41]: http://es6-features.org/#Constants	"EcmaScript6 Constants Documentation"
 [42]: https://medium.com/@apneadiving/metaprogramming-debugging-in-ruby-13c3a5a80667	"Debug with Metaprogramming in Ruby - Benjamin Roth, 10.04.2018"
-
